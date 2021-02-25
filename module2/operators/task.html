@@ -5,11 +5,17 @@
 
 <body>
     <script>
-        let a = +prompt("Первое число?");
-        let b = +prompt("Второе число?");
+        let a;
+        a = prompt("Первое число?");
+        let b; 
+        b = prompt("Второе число?");
 
-        alert(a + b); 
+        a = Number(a);
+        b = Number(b);
 
+        let result = a + b;
+
+        alert (result);
     </script>
 </body>
 
