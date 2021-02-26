@@ -1,0 +1,36 @@
+<html>
+
+<head>
+    <title>task1</title>
+</head>
+
+<body>
+
+
+
+    <script>
+        let login = prompt('укажите логин:');
+
+        if (login == '' || login == null) {
+            alert('отменено');
+        } else if (login !== 'админ') {
+            alert('я вас не знаю');
+        } else {
+            let pass = prompt('укажите пароль:');
+
+            if (pass == '' || pass == null) {
+                alert('отменено');
+            } else if (pass == 'я главный') {
+                alert('здравствуйте!');
+            } else {
+                alert('неверный пароль');
+            }
+        }
+
+    </script>
+
+
+
+</body>
+
+</html>
