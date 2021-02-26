@@ -1,0 +1,24 @@
+<html>
+
+<head>
+</head>
+
+<body>
+    <script>
+        let login = prompt("who");
+        let message =
+
+            (login == 'Сотрудник'
+                ? 'Привет'
+                : (login == 'Директор' 
+                   ? 'Здравствуйте' 
+                   :(login == '' ? 'Нет логина' : '')
+                )
+            );
+        alert(message);
+
+
+    </script>
+</body>
+
+</html>
