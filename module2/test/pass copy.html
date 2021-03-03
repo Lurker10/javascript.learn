@@ -1,0 +1,35 @@
+<html>
+
+<head>
+</head>
+
+<body>
+    <script>
+        const correctPass = "1234";
+        let pass;
+        let isPasswordCorrect;
+        for (let i = 1; i < 4; i++) {
+            pass = prompt("введите пароль");
+            if (pass == correctPass) {
+                isPasswordCorrect = true;
+                console.log("Привет");
+                break;
+            }
+
+        }
+        if (isPasswordCorrect) {
+            console.log(`правильный пароль ${pass}`);
+        }
+        else {
+            console.log(`неправильный пароль. ${pass},  а правильный ${correctPass}`);
+        }
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

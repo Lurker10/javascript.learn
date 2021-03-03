@@ -1,0 +1,23 @@
+<html>
+
+<head>
+</head>
+
+<body>
+    <script>
+        let max = +prompt("граница");
+        let step = +prompt("увеличитель");
+        let min = +prompt("начало");
+        if (min > max) {
+            console.log("начало > границы");
+        }
+        else {
+
+            for (let i = min; i <= max; i = i + step) {
+                console.log(i);
+            }
+        }
+    </script>
+</body>
+
+</html>

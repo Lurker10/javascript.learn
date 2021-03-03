@@ -1,0 +1,24 @@
+<html>
+
+<head>
+</head>
+
+<body>
+    <script>
+        let k = +prompt("граница");
+        let n = +prompt("увеличитель");
+        let m = +prompt("начало");
+        for (let i = m; i <= k; i = i + n) {
+            if (i % 10 !== 0) {
+                console.log(i);
+            }
+            else {
+                console.log("кратно 10");
+                break;
+            }
+            
+        }
+    </script>
+</body>
+
+</html>

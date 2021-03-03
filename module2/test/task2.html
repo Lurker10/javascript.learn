@@ -1,0 +1,41 @@
+<html>
+
+<head>
+</head>
+
+<body>
+    <script>
+        let max = +prompt("максимум");
+        let step = +prompt("шаг");
+        let min = +prompt("минимум");
+        let found = false;
+
+
+        for (let i = min; i <= max; i = i + step) {
+            if (i % 10 == 0) {
+                found = true;
+            }
+            console.log(i);
+        }
+        if (found) {
+            console.log("нашли");
+        }
+        else {
+            console.log("не нашли");
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

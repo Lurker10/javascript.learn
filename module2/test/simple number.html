@@ -1,0 +1,29 @@
+<html>
+
+<head>
+</head>
+
+<body>
+    <script>
+        let simpleNumber = +prompt("введите число");
+        let isSimple = true;
+        for (let i = 2; i < simpleNumber; i++) {
+            if (simpleNumber % i == 0) {
+                isSimple = false;
+                break;
+                
+            }
+            console.log(i);
+
+        }
+        if (isSimple) {
+            console.log("simple");
+        }
+        else {
+
+            console.log("notSimple");
+        }
+    </script>
+</body>
+
+</html>
