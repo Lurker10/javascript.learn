@@ -7,26 +7,17 @@
     <script>
         let n = +prompt("number");
         let fact1 = factorial(n);
-        let fact2 = factorial(n-2);
-
         console.log(fact1);
-        
-        console.log(fact2);
-
-
-
         function factorial(n) {
             let result = 1;
             for (let i = 0; i < n; i++) {
                 result = result * (n - i);
             }
-
-
             return result;
         }
-    
-        
-        
+
+
+
 
 
 

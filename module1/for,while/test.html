@@ -7,12 +7,15 @@
     <script>
         let n = +prompt("число");
         for (let j = 2; j <= n; j++) {
+            break;
             for (let i = 2; i < j; i++) {
                 if (j % i == 0) {
+                    break;
                     
                 }
-                alert(j);
+                
             }
+            alert(j);
         }
     </script>
 </body>
