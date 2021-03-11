@@ -1,0 +1,29 @@
+<html>
+
+<head>
+</head>
+
+<body>
+    <script>
+        let n = +prompt("number");
+        function showSimple(n) {
+            for (let i = 2; i < n; i++) {
+                if (!isSimple(i)) {
+                    continue;
+                }
+                console.log(i);
+            }
+        }
+        function isSimple(n) {
+            for (let i = 2; i < n; i++) {
+                if (n % i == 0)
+                    return false;
+            }
+            return true;
+        }
+        showSimple(n);
+
+    </script>
+</body>
+
+</html>
