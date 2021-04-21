@@ -1,0 +1,22 @@
+<html>
+
+<head>
+</head>
+
+<body>
+    <script>
+        let array = [ 100, 50, 5];
+        let min = Infinity;
+        
+
+
+        for ( let i = 0; i <= array.length; i++) {
+            if (array[i] < min && array[i] % 2 !== 0) {
+                min = array[i];
+            }
+        }
+        console.log(min);
+    </script>
+</body>
+
+</html>

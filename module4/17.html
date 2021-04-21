@@ -1,0 +1,25 @@
+<html>
+
+<head>
+</head>
+
+<body>
+    <script>
+        let arr = [1, 2, 3, 4, 5];
+        let i = 0;
+        let n = +prompt('число');
+        let index = +prompt('позиция');
+
+
+        for (i = arr.length-1; i >= index - 1; i--) {
+            arr[i + 1] = arr[i];
+        }
+        arr[index - 1] = n;
+        for (i = 0; i < arr.length; i++) {
+            console.log(arr[i]);
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+<html>
+
+<head>
+</head>
+
+<body>
+    <script>
+        let str = 'agagagaga van9';
+        let words = str.split(' ');
+        let longest = '';
+
+        for (let i = 0; i < words.length; i++) {
+            if (words[i].length > longest.length) {
+                longest = words[i];
+                
+            }
+        }
+        longest.replace(/a/g, "b");
+        console.log(str);
+        console.log(longest.replace(/a/g, "b"));
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+<html>
+
+<head>
+</head>
+
+<body>
+    <script>
+        let limit = +prompt('предел');
+        let num = +prompt('число-сума');
+        let sum = 0;
+        for (let i = 0; i <= limit; i++) {
+
+            for (let j = 0; j <= limit; j++) {
+
+                for (let k = 0; k <= limit; k++) {
+                    sum = i + j + k;
+                    if (sum == num) {
+                        console.log(i, j, k);
+                    }
+                }
+            }
+        }
+
+
+
+
+
+    </script>
+</body>
+
+</html>

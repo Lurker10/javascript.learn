@@ -1,0 +1,47 @@
+<html>
+
+<head>
+</head>
+
+<body>
+    <script>
+        while (true) {
+            let operation = prompt('знак операции');
+            console.log(operation);
+            if (operation == '+' || operation == '-' || operation == '*' || operation == '/') {
+            }
+            else {
+                console.log('неверный знак');
+
+            }
+            let x = +prompt('x=');
+            let y = +prompt('y=');
+            if (operation == '0') {
+                break;
+            }
+            if (operation == '+') {
+                console.log(x + y);
+
+            }
+            if (operation == '-') {
+                console.log(x - y);
+
+            }
+            if (operation == '*') {
+                console.log(x * y);
+
+            }
+            if (operation == '/') {
+                if (y == 0) {
+                    console.log('деление на 0');
+                }
+                console.log(x / y);
+            }
+
+
+        }
+
+    </script>
+</body>
+
+</html>

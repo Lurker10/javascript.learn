@@ -1,0 +1,30 @@
+<html>
+
+<head>
+</head>
+
+<body>
+    <script>
+        let arr = [];
+        let length = +prompt("введите длину массива")
+        for (let i = 0; i < length; i++) {
+            let elem = prompt("введите елементы");
+            arr.push(elem);
+        }
+        console.log(arr);
+
+
+
+        let min = +prompt('min');
+        let max = +prompt('max');
+        for (i = 0; i < arr.length; i++) {
+            if (arr[i] > min && arr[i] < max) {
+
+                console.log(arr[i]);
+            }
+        }
+
+    </script>
+</body>
+
+</html>

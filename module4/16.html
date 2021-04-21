@@ -1,0 +1,34 @@
+<html>
+
+<head>
+</head>
+
+<body>
+    <script>
+        let goods = ['Груши', 'Яблоки', 'Огурцы', 'Помидоры', 'Укроп', 'Петрушка', 'Курица', 'Сыр', 'Масло', 'Молоко'];
+        let prices = [40.50, 31.20, 21.80, 35.00, 150.00, 145.00, 200.00,
+            400.00, 81.40, 53.35];
+        let sum = 0;
+        let i = 0;
+        for (i = 0; i < goods.length && i < prices.length; i++) {
+            console.log(`${i + 1})${goods[i]} -  ${prices[i]} ua`);
+        }
+        console.log(`что берём?`, `вводите номер товара `, `введите количество`);
+        while (true) {
+            let n = +prompt("вводите номер товара");
+            console.log(`Товар: ${n}`);
+            if (n == 0) {
+                break;
+            }
+            let k = +prompt(`Kоличество: `);
+            console.log(`Kоличество: ${k}`);
+            if (n <= goods.length && n > 0 && k > 0){
+                sum = sum + prices[n - 1] * k;
+            }
+        }
+        console.log(sum);
+
+    </script>
+</body>
+
+</html>

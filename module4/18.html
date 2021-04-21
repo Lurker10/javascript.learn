@@ -1,0 +1,23 @@
+<html>
+
+<head>
+</head>
+
+<body>
+    <script>
+        let arr = [1, 8, 4, 5, 7, 9, 2, -1]
+        let tmp = 0;
+        for (let i = 0; i < arr.length - 1; i++) {
+            for (let j = i + 1; j < arr.length; j++) {
+                if (arr[j] < arr[i]) {
+                    tmp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = tmp;
+                }
+            }
+        }
+        console.log(arr);
+    </script>
+</body>
+
+</html>

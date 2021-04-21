@@ -1,0 +1,25 @@
+<html>
+
+<head>
+</head>
+
+<body>
+    <script>
+        let array = [3, -5, -2, 4, -8, 0];
+        let sum = negativeSumElements(array);
+        console.log(sum);
+
+        function negativeSumElements(array) {
+            let result = 0;
+            for (let i = 0; i < array.length; i++) {
+                if (array[i] < 0 && array[i] % 2 == 0) {
+                    result += array[i];
+                }
+            }
+
+            return result;
+        }
+    </script>
+</body>
+
+</html>
