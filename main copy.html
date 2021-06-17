@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<style>
+    .main {
+        background-color: #afeeee;
+        overflow: visible;
+        width: 15%;
+    }
+
+    .name {
+        color: red;
+        font-size: 20px;
+    }
+
+    .date {
+        font-size: 13px;
+        color: green;
+    }
+
+    .div {
+        font-size: 50px;
+    }
+
+    .comment {
+        font-size: 18px;
+    }
+
+    #text {
+        padding: 9px;
+
+    }
+
+    #input {
+        display: block;
+
+    }
+
+    #button {
+        display: block;
+        margin-bottom: 10px;
+    }
+</style>
+
+
+
+<body>
+
+
+
+    <div class='div'>
+        <input id='input' type='text'>
+        <textarea id='text' type='text'></textarea>
+        <button id='button' onclick="addRow()">+</button>
+    </div>
+    <script>
+
+
+        function addRow() {
+            let input = document.getElementById('input').value;
+            let text = document.getElementById('text').value;
+            let now = new Date().toLocaleString();
+            let date = document.createElement('div');
+            let name = document.createElement('div');
+            let comment = document.createElement('div');
+            let main = document.createElement('div');
+            main.className = 'main';
+            document.body.append(main)
+
+            name.textContent = input;
+            name.className = 'name';
+            date.textContent = now;
+            date.className = 'date';
+            comment.textContent = text;
+           
+            comment.className = 'comment'
+            main.appendChild(name);
+            main.appendChild(date);
+            main.appendChild(comment);
+            
+
+
+
+            document.getElementById('input').value = ' ';
+
+            document.getElementById('text').value = ' ';
+        }
+    </script>
+
+</body>
+
+</html>

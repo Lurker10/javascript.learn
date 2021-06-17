@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <style>
+
+    </style>
+</head>
+
+
+<body>
+
+
+
+    <textarea  id="textarea" wrap="off"></textarea>
+    <ul id="ul">
+
+    </ul>
+    <script>
+        let arr = [];
+        let txtArea = document.getElementById('textarea');
+        txtArea.addEventListener('keypress', onTestChange)
+        function onTestChange(event) {
+            let key = event.keyCode;
+
+            if (key === 13) {
+                arr.push(document.getElementById("textarea").value)
+
+                document.getElementById("textarea").value = ''
+                let ul = document.getElementById('ul')
+                let li = document.createElement('li')
+                for (let i = 0; i < arr.length; i++) {
+                    li.textContent = arr[i]
+                    ul.append(li)
+                    console.log(arr[i])
+                }
+            }
+           
+
+        }
+    </script>
+
+
+</body>
+
+</html>

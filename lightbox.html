@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  .modal {
+    display: none;
+    position: fixed;
+
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1;
+    -webkit-transition: opacity .5s;
+    -moz-transition: opacity .5s;
+    -ms-transition: opacity .5s;
+    -o-transition: opacity .5s;
+    transition: opacity .5s;
+
+  }
+
+
+
+
+  .close {
+    color: white;
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    font-size: 35px;
+    font-weight: bold;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: #999;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+
+
+
+
+
+  #gallery {
+
+    width: 700px;
+
+    margin: 50px auto;
+    text-align: center;
+  }
+
+  #gallery .photos img {
+    width: 100%;
+    height: 400px;
+    display: none;
+  }
+
+  #gallery .photos img:first-child {
+    display: block;
+  }
+
+  i {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+
+  }
+
+  .right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+
+  }
+
+  .left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+
+  }
+
+  #prev {
+    position: absolute;
+    top: 50%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: red;
+    color: white;
+    font-size: 16px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+  #next {
+    position: absolute;
+    top: 50%;
+    right: 16%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: red;
+    color: white;
+    font-size: 16px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+</style>
+
+<body>
+
+  <h2 style="text-align:center">Lightbox</h2>
+
+
+
+  <img src="C:\Users\Ivan\Desktop\makaki\8.jpg" style="width: 200px; height: 120px;" onclick="openModal()" class="kek">
+  <img src="C:\Users\Ivan\Desktop\makaki\9.jpg" style="width:200px; height: 120px;" onclick="openModal()" class="kek">
+  <img src="C:\Users\Ivan\Desktop\makaki\7.jpg" style="width:200px; height: 120px;" onclick="openModal()" class="kek">
+  </div>
+
+  <div id="myModal" class="modal">
+    <span class="close cursor" onclick="closeModal()">×</span>
+
+    <div id="gallery">
+      <div class="photos">
+
+      </div>
+      <div class="buttons">
+        <button id="prev" style="display: none;">
+          <p> <i class="left"></i></p>
+        </button>
+        <button id="next" style="display: block;">
+          <p><i class="right"></i></p>
+        </button>
+
+      </div>
+    </div>
+
+  </div>
+
+
+  <script>
+    let btnPrev = document.getElementById('prev');
+    let btnNext = document.getElementById('next');
+    let images = document.getElementsByClassName('photos')[0];
+    let pos = 0;
+    btnPrev.style.display = 'none';
+    btnNext.addEventListener('click', right);
+    let imgArr = document.getElementsByTagName('img');
+    for (let i = 0; i <= imgArr.length; i++) {
+
+    }
+
+
+    function right() {
+      btnPrev.style.display = 'block';
+      images[pos].style.display = 'none';
+      images[++pos].style.display = 'block';
+      if (pos == clone.length - 1) {
+        btnNext.style.display = 'none';
+      }
+    }
+
+    btnPrev.addEventListener('click', left);
+    function left() {
+      btnNext.style.display = 'block';
+      images[pos].style.display = 'none';
+      images[--pos].style.display = 'block';
+      if (pos == 0) {
+        btnPrev.style.display = 'none';
+      }
+    }
+    function openModal() {
+      document.getElementById('myModal').style.display = "block";
+    }
+
+    function closeModal() {
+      document.getElementById('myModal').style.display = "none";
+    }
+
+
+  </script>
+
+</body>
+
+</html>

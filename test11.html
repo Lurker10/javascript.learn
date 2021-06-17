@@ -23,18 +23,9 @@
 
     <script src="D:\danila\Projects\javascript.learn\data.js"></script>
     <script>
-
         let data = getData();
         let selectedCities = [];
         let table = document.getElementById('table')
-        let savedCities = localStorage.getItem('test');
-        if (savedCities) {
-            selectedCities = JSON.parse(savedCities);
-
-        }
-        render()
-
-
         let button = document.getElementById('button')
         let select = document.getElementById('select')
         let value = select.value;
@@ -46,45 +37,26 @@
 
         function addCity() {
             let value = select.value;
-            let flag = false;
-
-            for (let i = 0; i < selectedCities.length; i++) {
-                if (selectedCities[i] == value) {
-                    flag = true;
-                }
-
-            }
-            if (flag) {
-                alert('city has been declared');
-
-            }
-            else {
-                selectedCities.push(value);
-                let selectedCitiesStr = JSON.stringify(selectedCities);
-                localStorage.setItem('test', selectedCitiesStr);
-                render()
-            }
-
-
+            selectedCities.push(value);
+            render()
 
         }
         function render() {
 
 
-            while (table.rows.length > 1) {
-                table.deleteRow(1);
+            while (table.firstChild) {
+                table.removeChild(table.firstChild);
+
             }
             for (let i = 0; i < selectedCities.length; i++) {
 
                 let tr = document.createElement('tr')
                 let td = document.createElement('td')
-
                 let td1 = document.createElement('td')
 
                 let td2 = document.createElement('td')
                 let cityData = dataSearch(selectedCities[i])
                 td.textContent = selectedCities[i];
-
                 td1.textContent = cityData.main.temp;
                 td2.textContent = cityData.wind.speed;
                 tr.appendChild(td)
@@ -94,32 +66,17 @@
                 let x = document.createElement('button');
                 x.textContent = "X";
                 tr.append(x);
-                x.addEventListener('click', deleteCity)
-
+                x.addEventListener('click', x2)
             }
+        }
 
+        
+        function x2() {
+            this.parentElement.remove();
         }
 
 
-        function deleteCity(event) {
-            let button = event.target;
-            let parentNode = button.parentNode;
-            let name = parentNode.firstChild;
 
-            console.log(name)
-
-
-            for (i = 0; i < selectedCities.length; i++) {
-                if (selectedCities[i] == name.textContent) {
-                    selectedCities.splice(i, 1)
-                    break;
-                }
-            }
-            let selectedCitiesStr = JSON.stringify(selectedCities)
-            localStorage.setItem('test', selectedCitiesStr);
-            render()
-
-        }
 
         function dataSearch(cityName) {
             for (let i = 0; i < data.length; i++) {

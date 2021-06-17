@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<style>
+    .main {
+
+        overflow: visible;
+        width: 15%;
+    }
+
+    .name {
+        color: red;
+        font-size: 20px;
+    }
+
+    .date {
+        font-size: 13px;
+        color: green;
+    }
+
+    .div {
+        font-size: 50px;
+    }
+
+    .comment {
+        font-size: 18px;
+    }
+
+    #text {
+        padding: 9px;
+
+    }
+
+    #input {
+        display: block;
+
+    }
+
+    #button {
+        display: block;
+        margin-bottom: 10px;
+    }
+</style>
+
+
+
+<body>
+
+
+
+    <div id='div'>
+        <input id='input' type='text'>
+        <textarea id='text' type='text'></textarea>
+        <button id='button' onclick="addComment()">+</button>
+    </div>
+    <div id='container'></div>
+    <script>
+
+        let arr = [];
+        let id = 0;
+
+        function addComment() {
+
+
+            let author = document.getElementById('input').value;
+            let ert = document.getElementById('text').value;
+            let date = new Date().toLocaleString();
+            let color = '#' + (Math.random().toString(16) + '000000').substring(2, 8);
+
+            let flag = false;
+            for (let i = 0; i < arr.length; i++) {
+
+                if (arr[i].textContent == ert) {
+                    flag = true;
+                }
+
+
+            }
+            if (flag) {
+                alert('spam')
+            } else {
+                id = id + 1;
+                let comment = {
+
+                }
+                comment.author = author;
+                comment.textContent = ert;
+                comment.date = date;
+                comment.id = id;
+                comment.color = color;
+
+                arr.push(comment)
+
+
+                document.getElementById('input').value = '';
+
+                document.getElementById('text').value = '';
+                console.log(id)
+                render()
+
+            }
+        }
+        function render() {
+            let container = document.getElementById('container');
+
+            while (container.firstChild) {
+                container.removeChild(container.firstChild);
+
+            }
+
+
+            for (let i = 0; i < arr.length; i++) {
+                let comment = arr[i];
+
+                let date = document.createElement('div');
+                let author = document.createElement('div');
+                let text = document.createElement('div');
+                let main = document.createElement('div');
+                main.setAttribute('id', comment.id)
+                main.setAttribute('style', "background-color: " + comment.color)
+               
+                date.textContent = comment.date
+                date.className = 'date';
+                author.textContent = comment.author;
+                author.className = 'author';
+                text.textContent = comment.textContent;
+                text.className = 'text';
+                let button = document.createElement('button');
+                button.textContent = "-";
+
+
+                button.addEventListener('click', removeComment)
+
+                container.append(main);
+
+                main.appendChild(author);
+                main.appendChild(date);
+                main.appendChild(text);
+                main.appendChild(button);
+
+            }
+
+        }
+        function removeComment(event) {
+            let button = event.target;
+            let parentNode = button.parentNode;
+            let i = 0
+            let id = parentNode.getAttribute('id');
+
+            for (i = 0; i < arr.length; i++) {
+                if (arr[i].id == id) {
+                    arr.splice(i, 1)
+                }
+            }
+            render()
+        }
+
+
+    </script>
+
+</body>
+
+</html>

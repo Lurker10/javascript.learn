@@ -1,0 +1,46 @@
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <ul id="list">
+        
+    </ul>
+    <button id="knopka"> add word </button>
+
+
+
+    <script>
+        let list = document.getElementById('list')
+        const btn = document.getElementById('knopka');
+
+
+        btn.addEventListener('click', f);
+
+
+        let id = 0;
+        
+        function f() {
+            let word = prompt("Введите текст для элемента списка");
+            let li = document.createElement('li');
+            let x = document.createElement('button');
+            x.textContent = "X";
+            li.textContent = word;
+            list.append(li);
+            li.append(x);
+            
+
+            x.addEventListener('click', x2)
+
+        }
+        function x2() {
+            this.parentElement.remove();
+        }
+
+
+    </script>
+</body>
+
+</html>

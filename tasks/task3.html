@@ -1,0 +1,55 @@
+<html>
+
+<head>
+</head>
+
+<body>
+
+    <input type="Button" value="add column" onclick="addColumn()">
+    <table id="table" border="1">
+        <tr>
+            <td>имя</td>
+            <td>Фамилия</td>
+            
+        </tr>
+
+
+
+    </table>
+    <input type="Button" value="add row" onclick="addRow()">
+    
+
+    <script>
+      let trs = document.querySelectorAll('tr');
+        function addRow() {
+
+            let tr = document.createElement('tr');
+
+            for (let i = 0; i < table.querySelectorAll('tr')[0].querySelectorAll('td').length; i++) {
+                let td = document.createElement('td');
+
+                td.textContent = "gagaga";
+                tr.appendChild(td);
+
+            }
+
+            table.appendChild(tr);
+
+        }
+        function addColumn() {
+
+            let trs = document.querySelectorAll('tr');
+
+            for (let tr of trs) {
+                let td = document.createElement('td');
+                td.textContent = "adadada";
+                tr.appendChild(td);
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>

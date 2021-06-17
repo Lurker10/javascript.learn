@@ -1,0 +1,79 @@
+<html>
+
+<head>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <table border='1' id="table">
+        <tbody>
+            <tr id='tr'>
+                <td>Продукты</td>
+                <td>Цена</td>
+            </tr>
+            <tr hidden id='row-example'>
+                <td><input type='text' value="" /></td>
+                <td><input type='number' value="" class='price'> </td>
+            </tr>
+            <tr>
+                <td><input type='text' value="Яблоко" /></td>
+                <td><input type='number' value="5" class='price'> </td>
+            </tr>
+            <tr>
+                <td><input type='text' value="Пирог" /></td>
+                <td><input type='number' value="5" class='price'> </td>
+            </tr>
+            <tr id='total-row'>
+                <td>Всего</td>
+                <td id='sum'>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <input type="Button" value="add row" onclick="addRow()">
+    <script>
+        let tableElem = document.getElementById('table');
+        let inputsArr = document.getElementsByClassName('price')
+
+
+        for (let i = 0; i < inputsArr.length; i++) {
+            inputsArr[i].addEventListener('change', recalculatePrice);
+        }
+
+
+        let total = 0;
+
+        function recalculatePrice() {
+            let inputs = tableElem.getElementsByClassName('price')
+            let sum = document.getElementById('sum');
+
+            let total = 0;
+            for (let i = 0; i < inputs.length; i++) {
+                total = total + Number(inputs[i].value);
+
+
+            }
+            sum.textContent = total
+        }
+        recalculatePrice()
+        function addRow() {
+
+            let tbody = tableElem.querySelector('tbody');
+            let row = document.getElementById('row-example');
+            let totalRow = document.getElementById('total-row');
+            let clone = row.cloneNode(true);
+            let kek = clone.getElementsByTagName('input');
+            for (let i = 0; i < kek.length; i++) {
+                kek[i].addEventListener('change', recalculatePrice);
+            }
+            clone.removeAttribute('hidden');
+            tbody.insertBefore(clone, totalRow);
+
+        }
+    </script>
+
+</body>
+
+</html>

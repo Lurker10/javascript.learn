@@ -1,0 +1,27 @@
+<html>
+
+<head>
+</head>
+
+<body>
+  <script>
+    let txt1 = prompt('first');
+    let txt2 = prompt(`second`);
+    let pos1 = +prompt('с какого индекса');
+    let len1 = +prompt('сколько букв');
+    let pos2 = +prompt('куда вставить');
+    let a = txt2.slice(0, pos2);
+    let b = txt1.slice(pos1, pos1 + len1);
+    let c = txt2.slice(pos2);
+
+    let txt3 = a + b + c;
+    console.log(a);
+    console.log(b);
+    console.log(c);
+
+    console.log(txt3);
+
+  </script>
+</body>
+
+</html>

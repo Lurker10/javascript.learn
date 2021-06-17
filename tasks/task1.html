@@ -1,0 +1,40 @@
+<html>
+
+<head>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    first_name <input  id='first_name'>
+    last_name <input id='last_name'><button onclick="addRow()"> OK </button>
+
+    <table id='table' border="1">
+        <tr>
+            <td>first_name</td>
+            <td>last_name</td>
+        </tr>
+    </table>
+    <script>
+
+        function addRow() {
+            let firstName = document.getElementById('first_name').value;
+            let lastName = document.getElementById('last_name').value;
+            let tr = document.createElement('tr');
+            let td2 = document.createElement('td');
+            let td = document.createElement('td');
+            td.textContent = firstName;
+            td2.textContent = lastName;
+            tr.appendChild(td);
+            tr.appendChild(td2);
+            table.appendChild(tr);
+            document.getElementById('first_name').value = ' ';
+            document.getElementById('last_name').value = ' ';
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        #gallery {
+            width: 500px;
+            margin: auto;
+            text-align: center;
+        }
+
+        #gallery .photos img {
+            width: 100%;
+            display: none;
+        }
+
+        #gallery .photos img:first-child {
+            display: block;
+        }
+
+        i {
+            border: solid black;
+            border-width: 0 3px 3px 0;
+            display: inline-block;
+            padding: 3px;
+
+        }
+
+        .right {
+            transform: rotate(-45deg);
+            -webkit-transform: rotate(-45deg);
+
+        }
+
+        .left {
+            transform: rotate(135deg);
+            -webkit-transform: rotate(135deg);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="gallery">
+        <div class="photos">
+            <img src="C:\Users\Ivan\Desktop\makaki\8.jpg">
+            <img src="C:\Users\Ivan\Desktop\makaki\9.jpg">
+            <img src="C:\Users\Ivan\Desktop\makaki\7.jpg">
+        </div>
+        <div class="buttons">
+            <button id="prev" style="display: none;">
+                <p> <i class="left"></i></p>
+            </button>
+            <button id="next" style="display: block;">
+                <p><i class="right"></i></p>
+            </button>
+
+        </div>
+    </div>
+
+    <script>
+        let btnPrev = document.getElementById('prev');
+        let btnNext = document.getElementById('next');
+        let images = document.getElementsByTagName('img');
+        console.log(images)
+        let pos = 0;
+        btnPrev.style.display = 'none';
+        btnNext.addEventListener('click', right);
+        function right() {
+            btnPrev.style.display = 'block';
+            images[pos].style.display = 'none';
+            console.log(pos)
+            images[++pos].style.display = 'block';
+            if (pos == images.length - 1) {
+                btnNext.style.display = 'none';
+            }
+        }
+
+        btnPrev.addEventListener('click', left);
+        function left() {
+            btnNext.style.display = 'block';
+            console.log(images)
+            images[pos].style.display = 'none';
+            console.log(pos)
+            images[--pos].style.display = 'block';
+            if (pos == 0) {
+                btnPrev.style.display = 'none';
+            }
+        }
+
+
+    </script>
+
+</body>
+
+</html>

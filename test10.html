@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Untitled</title>
+    <meta charset="utf-8">
+
+</head>
+
+<body>
+
+
+    <select id="select_">
+        <option value="one">1</option>
+        <option value="two">2</option>
+        <option value="three">3</option>
+    </select>
+    <table border="1" id='table'></table>
+
+    <input type="submit" value="Отправить" onclick="getValue()">
+    </form>
+
+    <script>
+        function getValue() {
+            let table = document.getElementById('table')
+            let select = document.getElementById("select");
+            let value = select.value;
+            let tr = document.createElement('tr')
+            let td = document.createElement('td')
+            td.textContent = value;
+            tr.appendChild(td)
+            table.appendChild(tr);
+
+        }
+    </script>
+
+</body>
+
+</html>
