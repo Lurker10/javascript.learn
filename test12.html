@@ -4,7 +4,7 @@
 <head>
 
     <style>
-       input {
+        textarea {
             width: 100%;
             height: 25px;
             background-color: #ce7fff;
@@ -25,15 +25,20 @@
 <body>
 
 
-    <script src=D:\danila\Projects\javascript.learn\moment.js></script>
+    <script src=C:\Users\ДАНИЛА\Desktop\momentjs\moment.js></script>
     <script>
         const today = moment();
         const fromDate = today.clone().startOf('week');
+        var counter = 0;
         let week = [];
         for (let i = 1; i < 8; i++) {
             week.push(fromDate.clone().add(i, 'days').format("MMMM Do,dddd"));
         }
+
+        console.log('storage - %o', window.localStorage);
+        var DATA = JSON.parse(window.localStorage.getItem('obj')) || {};
         render()
+
         function render() {
             let h1 = document.getElementById('h1');
             h1.textContent = today.format("MMMM ,YYYY");
@@ -59,43 +64,68 @@
                 let tr = document.createElement('tr');
                 for (let j = 0; j <= 7; j++) {
                     let td = document.createElement('td');
-                    let textarea = document.createElement('input');
-                    let ul = document.createElement('ul')
-                    ul.id = 'ul'
-                    textarea.id = 'textarea'
+                    let textarea = document.createElement('textarea');
+                    let ul = document.createElement('ul');
+                    let counter = getCounter();
+
+                    let data = DATA['textarea_' + counter];
+                    if (data) {
+                        data.forEach(function(item) {
+                            let li = document.createElement('li');
+
+                            li.textContent = item
+                            ul.append(li);
+                        });
+                    }
+
+                    ul.id = 'ul_' + counter;
+                    textarea.id = 'textarea_' + counter;
+
                     td.appendChild(textarea);
-                    td.appendChild(ul)
+                    td.appendChild(ul);
                     tr.appendChild(td);
-                    
                 }
+
                 tr.firstChild.textContent = 8 + i + '.00'
                 table.appendChild(tr);
             }
         }
-        let arr = [];
-        let txtArea = document.getElementById('textarea');
-        txtArea.addEventListener('keypress', onTestChange)
-        function onTestChange(event) {
-            let key = event.keyCode;
-            if (key === 13) {
-                arr.push(document.getElementById("textarea").value)
 
-                document.getElementById("textarea").value = ''
-                let ul = document.getElementById('ul')
-                let li = document.createElement('li')
-                for (let i = 0; i < arr.length; i++) {
-                    li.textContent = arr[i]
-                    ul.append(li)
-                    console.log(arr[i])
-                }
-            }
-
-
+        function getCounter() {
+            return counter++;
         }
 
+        let obj = DATA || {};
+
+        for (let i = 0; i < counter; i++) {
+            if (i % 8 == 0) {
+                continue;
+            }
+            let txtArea = document.getElementById('textarea_' + i);
+
+            txtArea.addEventListener('keypress', function(event) {
+                let key = event.keyCode;
+                if (key === 13) {
+                    let id = "textarea_" + i;
+                    let value = document.getElementById(id).value.trim();
+
+                    document.getElementById("textarea_" + i).value = '';
+                    let ul = document.getElementById('ul_' + i);
+                    let li = document.createElement('li');
+
+                    li.textContent = value
+                    ul.append(li);
+
+                    if (!obj[id]) {
+                        obj[id] = []
+                    }
+                    obj[id].push(value)
+
+                    window.localStorage.setItem('obj', JSON.stringify(obj));
+                }
+            });
+        }
     </script>
-
-
 </body>
 
 </html>
