@@ -13,54 +13,57 @@
 </head>
 <h1 id='h1'>
 </h1>
-<table id="table" bgcolor="#ce7fff" cellspacing="0" cellpadding="5" border="1" align="center">
-
-    <tbody id="tbody">
-
-    </tbody>
-
-</table>
-
 
 <body>
 
 
-    <script src=C:\Users\ДАНИЛА\Desktop\momentjs\moment.js></script>
+    <script src=moment.js></script>
     <script>
 
         const today = moment();
         const fromDate = today.clone().startOf('week');
-        var counter = 0;
+
         let week = [];
         for (let i = 1; i < 8; i++) {
             week.push(fromDate.clone().add(i, 'days').format("MMMM Do,dddd"));
         }
+        let color = '#' + (Math.random().toString(16) + '000000').substring(2, 8);
 
-        var info = JSON.parse(window.localStorage.getItem('obj')) || {};
-        var colors = {
-            0: 'green',
-            1: 'yellow',
-            2: 'pink'
-        };
-        var reverseColors = {
-            'green': 0,
-            'yellow': 1,
-            'pink': 2
-        };
+
 
         render();
+        render();
+        render();
+
 
         function render() {
+            let oldTable = document.getElementById('table');
+            if (oldTable) {
+                oldTable.remove();
+            }
+
+            let body = document.getElementsByTagName("body")[0];
+            let table = document.createElement("table");
+            let tbody = document.createElement("tbody");
+            table.appendChild(tbody);
+            body.appendChild(table);
+            table.setAttribute("border", "2");
+            table.id = 'table'
+            table.bgColor = '#ce7fff';
+            table.cellSpacing = '0';
+            table.cellPadding = '5';
+            table.align = 'center';
             let h1 = document.getElementById('h1');
             h1.textContent = today.format("MMMM ,YYYY");
-            renderHead();
+            renderHead(tbody);
             renderBody(table);
+            assignEventListeners(table)
         }
-        function renderHead() {
-            let tr = document.createElement('tr'),
-                time = document.createElement('td'),
-                input = document.createElement('input'),
-                date = 0;
+        function renderHead(tbody) {
+            let tr = document.createElement('tr')
+            let time = document.createElement('td')
+            let input = document.createElement('input')
+            let date = 0;
 
             tr.appendChild(time);
             time.textContent = 'time';
@@ -73,26 +76,36 @@
             }
         }
         function renderBody(table) {
+
+            let counter = 0;
+            var info = JSON.parse(window.localStorage.getItem('obj')) || {};
             for (let i = 0; i <= 11; i++) {
                 let tr = document.createElement('tr');
                 for (let j = 0; j <= 7; j++) {
+                    counter = counter + 1;
                     let td = document.createElement('td'),
                         textarea = document.createElement('textarea'),
                         ul = document.createElement('ul'),
-                        counter = getCounter(),
                         textAreaId = 'textarea_' + counter;
 
                     let data = info['textarea_' + counter];
-                    if (data) {
-                        data.forEach(function (item) {
-                            let li = document.createElement('li');
 
+                    if (data) {
+                        let items = data.items;
+                        let color = data.color;
+                        if (color) {
+                            td.style.backgroundColor = color;
+                        }
+
+                        for (let k = 0; k < items.length; k++) {
+                            let item = items[k];
+
+                            let li = document.createElement('li');
                             li.textContent = item;
                             let button = createButton(textAreaId);
-
                             li.append(button);
                             ul.append(li);
-                        });
+                        }
                     }
                     ul.id = 'ul_' + counter;
                     textarea.id = textAreaId;
@@ -107,70 +120,101 @@
             }
         }
 
-        function getCounter() {
-            return counter++;
-        }
+
 
         function createButton(id) {
             let button = document.createElement('button');
+
             button.textContent = "-";
 
-            button.addEventListener('click', function(event) {
+            button.addEventListener('click', function (event) {
+                let obj = JSON.parse(window.localStorage.getItem('obj')) || {};
                 let parentNode = event.target.parentNode,
                     value = parentNode.textContent,
-                    index = obj[id].indexOf(value.substr(0, value.length - 1));
+                    index = obj[id].items.indexOf(value.substr(0, value.length - 1));
 
                 if (index > -1) {
-                    obj[id].splice(index, 1);
+                    obj[id].items.splice(index, 1);
+
                 }
 
-                parentNode.remove();
                 window.localStorage.setItem('obj', JSON.stringify(obj));
+                render();
             });
 
             return button;
         }
 
-        let obj = info || {};
 
-        for (let i = 0; i < counter; i++) {
-            if (i % 8 == 0) {
-                continue;
+        function assignEventListeners(table) {
+
+            let txtAreaArr = table.getElementsByTagName('textarea');
+            for (let i = 0; i < txtAreaArr.length; i++) {
+                txtAreaArr[i].addEventListener('keypress', onTextAreaEnter)
             }
-            let txtArea = document.getElementById('textarea_' + i);
+            let tds = table.getElementsByTagName('td');
+            for (let i = 0; i < tds.length; i++) {
+                tds[i].addEventListener('mousedown', function (event) {
 
-            txtArea.addEventListener('keypress', function (event) {
-                let key = event.keyCode;
-                if (key === 13) {
-                    let id = "textarea_" + i,
-                        value = document.getElementById(id).value.trim(),
-                        ul = document.getElementById('ul_' + i),
-                        li = document.createElement('li'),
-                        button = createButton(id);
+                    if (event.button == 1) {
+                        let obj = JSON.parse(window.localStorage.getItem('obj')) || {};
+                        let target = event.target;
+                        let txtArea = target.getElementsByTagName('textarea')[0];
+                        console.log(txtArea)
+                        let id = txtArea.id
 
-                    document.getElementById("textarea_" + i).value = '';
-                    li.textContent = value;
+                        if (!obj[id]) {
+                            obj[id] = {
+                                items: [],
+                                color: null
+                            };
+                        }
+                        let color = '#' + (Math.random().toString(16) + '000000').substring(2, 8);
+                        obj[id].color = color;
 
-                    ul.append(li);
-                    li.append(button);
 
-                    if (!obj[id]) {
-                        obj[id] = [];
+                        window.localStorage.setItem('obj', JSON.stringify(obj));
+                        render();
                     }
-                    obj[id].push(value);
-                    window.localStorage.setItem('obj', JSON.stringify(obj));
-                }
-            });
+                });
+            }
 
-            let td = document.getElementById('td_' + i);
-            td.addEventListener('mousedown', function(event) {
-                if (event.button === 1) {
-                    let id = ( ( reverseColors[td.bgColor] || 0 ) + 1 ) % 3;
-                    td.bgColor = colors[id];
-                    txtArea.style.backgroundColor = colors[id];
-                }
-            } );
+
         }
+
+        function onTextAreaEnter(event) {
+            let keyCode = event.keyCode;
+            if (keyCode === 13) {
+                let targetTxtArea = event.target;
+                let id = targetTxtArea.id;
+
+                let obj = JSON.parse(window.localStorage.getItem('obj')) || {};
+                if (!obj[id]) {
+                    obj[id] = {
+                        items: [],
+                        color: null
+                    };
+                }
+                obj[id].items.push(targetTxtArea.value);
+                window.localStorage.setItem('obj', JSON.stringify(obj));
+                render()
+            }
+
+        }
+
+
+
+        /*
+                var i = 0;
+                let td = document.getElementById('td_' + i);
+                td.addEventListener('mousedown', function (event) {
+                    if (event.button === 1) {
+                        let id = ((reverseColors[td.bgColor] || 0) + 1) % 3;
+                        td.bgColor = colors[id];
+                        txtArea.style.backgroundColor = colors[id];
+                    }
+                });
+        */
     </script>
 </body>
 

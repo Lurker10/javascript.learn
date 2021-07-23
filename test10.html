@@ -13,13 +13,7 @@
 </head>
 <h1 id='h1'>
 </h1>
-<table id="table" bgcolor="#ce7fff" cellspacing="0" cellpadding="5" border="1" align="center">
 
-    <tbody id="tbody">
-
-    </tbody>
-
-</table>
 
 
 <body>
@@ -27,7 +21,7 @@
 
     <script src=moment.js></script>
     <script>
-    
+     
         const today = moment();
         const fromDate = today.clone().startOf('week');
         var counter = 0;
@@ -38,8 +32,8 @@
 
         var info = JSON.parse(window.localStorage.getItem('obj')) || {};
         render()
-
-
+        render()
+        render()
         function render() {
             let body = document.getElementsByTagName("body")[0];
             let table = document.createElement("table");
@@ -58,6 +52,7 @@
             renderBody(table);
         }
         function renderHead() {
+            let tbody = document.createElement("tbody");
             let tr = document.createElement('tr'),
                 time = document.createElement('td'),
                 input = document.createElement('input'),
@@ -133,7 +128,7 @@
             return button;
         }
 
-        let obj = info || {};
+        
 
         for (let i = 0; i < counter; i++) {
             if (i % 8 == 0) {
