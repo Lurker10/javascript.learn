@@ -27,7 +27,7 @@
         for (let i = 1; i < 8; i++) {
             week.push(fromDate.clone().add(i, 'days').format("MMMM Do,dddd"));
         }
-        let color = '#' + (Math.random().toString(16) + '000000').substring(2, 8);
+        
 
 
 
@@ -37,6 +37,7 @@
 
 
         function render() {
+            
             let oldTable = document.getElementById('table');
             if (oldTable) {
                 oldTable.remove();

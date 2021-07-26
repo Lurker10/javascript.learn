@@ -18,8 +18,52 @@
 
     <script src=moment.js></script>
     <script>
-       
-    
+
+
+        class Student {
+            constructor(name, surname) {
+                this.name = name;
+                this.surname = surname;
+            }
+            printFullName() {
+                console.log(this.name + " " + this.surname)
+            }
+        }
+
+        class Group {
+            constructor() {
+                this.list = [];
+
+            }
+            addStudent(a) {
+                if (a instanceof Student) {
+                    this.list.push(a);
+
+                }
+
+            }
+            printGroup() {
+
+                for (let i = 0; i < this.list.length; i++) {
+                    this.list[i].printFullName()
+                }
+            }
+        }
+        let student = new Student('danya', 'zarudnyi');
+        let student2 = new Student('vanya', 'zarudnyi');
+        let group = new Group();
+        group.addStudent(student );
+        group.addStudent(student2 );
+        group.printGroup()
+
+
+
+
+
+
+
+
+
     </script>
 </body>
 
