@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <style>
+        textarea {
+            width: 100%;
+            height: 25px;
+            background-color: #ce7fff;
+        }
+    </style>
+</head>
+<h1 id='h1'>
+</h1>
+
+
+
+<body>
+
+
+    <script src=moment.js></script>
+    <script>
+     
+        const today = moment();
+        const fromDate = today.clone().startOf('week');
+        var counter = 0;
+        let week = [];
+        for (let i = 1; i < 8; i++) {
+            week.push(fromDate.clone().add(i, 'days').format("MMMM Do,dddd"));
+        }
+
+        var info = JSON.parse(window.localStorage.getItem('obj')) || {};
+        render()
+        render()
+        render()
+        function render() {
+            let body = document.getElementsByTagName("body")[0];
+            let table = document.createElement("table");
+            let tbody = document.createElement("tbody");
+            table.appendChild(tbody);
+            body.appendChild(table);
+            table.setAttribute("border", "2");
+            table.id = 'table'
+            table.bgColor = '#ce7fff';
+            table.cellSpacing = '0';
+            table.cellPadding = '5';
+            table.align = 'center';
+            let h1 = document.getElementById('h1');
+            h1.textContent = today.format("MMMM ,YYYY");
+            renderHead();
+            renderBody(table);
+        }
+        function renderHead() {
+            let tbody = document.createElement("tbody");
+            let tr = document.createElement('tr'),
+                time = document.createElement('td'),
+                input = document.createElement('input'),
+                date = 0;
+
+            tr.appendChild(time);
+            time.textContent = 'time';
+
+            for (let i = 0; i < week.length; i++) {
+                let td = document.createElement('td')
+                td.textContent = week[i];
+                tr.appendChild(td)
+                tbody.appendChild(tr);
+            }
+        }
+        function renderBody(table) {
+            for (let i = 0; i <= 11; i++) {
+                let tr = document.createElement('tr');
+                for (let j = 0; j <= 7; j++) {
+                    let td = document.createElement('td'),
+                        textarea = document.createElement('textarea'),
+                        ul = document.createElement('ul'),
+                        counter = getCounter(),
+                        textAreaId = 'textarea_' + counter;
+
+                    let data = info['textarea_' + counter];
+                    if (data) {
+                        data.forEach(function (item) {
+                            let li = document.createElement('li');
+
+                            li.textContent = item;
+                            let button = createButton(textAreaId);
+
+                            li.append(button);
+                            ul.append(li);
+                        });
+                    }
+
+                    ul.id = 'ul_' + counter;
+                    textarea.id = textAreaId;
+
+                    td.appendChild(textarea);
+                    td.appendChild(ul);
+                    tr.appendChild(td);
+                }
+
+                tr.firstChild.textContent = 8 + i + '.00'
+                table.appendChild(tr);
+            }
+        }
+
+        function getCounter() {
+            return counter++;
+        }
+
+        function createButton(id) {
+            let button = document.createElement('button');
+            button.textContent = "-";
+
+            button.addEventListener('click', function (event) {
+                let parentNode = event.target.parentNode,
+                    value = parentNode.textContent,
+                    index = obj[id].indexOf(value.substr(0, value.length - 1));
+
+                if (index > -1) {
+                    obj[id].splice(index, 1);
+                }
+
+                parentNode.remove();
+                window.localStorage.setItem('obj', JSON.stringify(obj));
+            });
+
+            return button;
+        }
+
+        
+
+        for (let i = 0; i < counter; i++) {
+            if (i % 8 == 0) {
+                continue;
+            }
+            let txtArea = document.getElementById('textarea_' + i);
+            txtArea.addEventListener('keypress', function (event) {
+                let key = event.keyCode;
+                if (key === 13) {
+                    let id = "textarea_" + i,
+                        value = document.getElementById(id).value.trim(),
+                        ul = document.getElementById('ul_' + i),
+                        li = document.createElement('li'),
+                        button = createButton(id);
+
+                    document.getElementById("textarea_" + i).value = '';
+                    li.textContent = value;
+
+                    ul.append(li);
+                    li.append(button);
+
+                    if (!obj[id]) {
+                        obj[id] = [];
+                    }
+                    obj[id].push(value);
+                    window.localStorage.setItem('obj', JSON.stringify(obj));
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
