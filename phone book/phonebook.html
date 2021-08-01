@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+</head>
+
+<body>
+    <div id="phonebook">
+
+    </div>
+
+    <script>
+        let data = [
+            {
+                name: 'vasya',
+                company: 'OOP',
+                phone: 0999999991,
+            },
+            {
+                name: 'petya',
+                company: 'GGWP',
+                phone: 0999999992,
+            },
+            {
+                name: 'galya',
+                company: 'PPV',
+                phone: 0999999993,
+            }
+        ];
+
+        window.localStorage.setItem('contacts', JSON.stringify(data));
+        function renderPhoneList() {
+            let phonebook = document.getElementById('phonebook');
+            let ul = document.createElement('ul');
+            ul.id = 'ul';
+
+            phonebook.appendChild(ul);
+            for (let i = 0; i < data.length; i++) {
+                let button = document.createElement('button');
+                let li = document.createElement('li');
+                li.textContent = data[i].name;
+                ul.appendChild(li);
+                li.append(button);
+                button.textContent = '+';
+                button.id = 'button';
+            }
+
+        }
+        renderPhoneList()
+        function renderContactPage() {
+            let ul = document.getElementById('ul');
+            if (ul) {
+                ul.remove();
+            }
+            let button = document.getElementById('button');
+
+        }
+        renderContactPage()
+
+    </script>
+</body>
+
+</html>

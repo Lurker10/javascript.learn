@@ -5,6 +5,4 @@ export class Contact{
         this.phone = phone;
         this.id = id;
     }
-    
-
 }
